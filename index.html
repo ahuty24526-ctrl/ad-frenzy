@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ad Frenzy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial;
+      background:#121212;
+      color:white;
+      text-align:center;
+    }
+
+    .card{
+      background:#1e1e1e;
+      padding:20px;
+      margin:15px;
+      border-radius:15px;
+    }
+
+    button{
+      width:100%;
+      padding:15px;
+      margin-top:10px;
+      border:none;
+      border-radius:10px;
+      background:#00ff88;
+      color:black;
+      font-weight:bold;
+      font-size:16px;
+    }
+
+    input{
+      width:95%;
+      padding:12px;
+      margin-top:10px;
+      border-radius:8px;
+      border:none;
+    }
+
+    h1{color:#00ff88}
+  </style>
+</head>
+
+<body>
+
+<h1>🔥 Ad Frenzy</h1>
+
+<div class="card">
+  <h2>Coins: <span id="coins">0</span></h2>
+  <small>25,000 coins = $25 withdraw</small>
+</div>
+
+<div class="card">
+  <button onclick="watchAd()">Watch Ad → +10 coins</button>
+  <button onclick="dailyBonus()">Daily Bonus → +50 coins</button>
+</div>
+
+<div class="card">
+  <h3>Referral</h3>
+  <p>Your code: <b id="myCode"></b></p>
+  <input id="ref" placeholder="Enter referral code">
+  <button onclick="applyRef()">Apply Code</button>
+</div>
+
+<div class="card">
+  <h3>Withdraw</h3>
+  <input id="details" placeholder="Bank / Crypto details">
+  <button onclick="withdraw()">Withdraw $25</button>
+</div>
+
+<script>
+let coins = localStorage.getItem("coins") || 0;
+coins = parseInt(coins);
+
+document.getElementById("coins").innerText = coins;
+
+let myCode = "AF" + Math.floor(Math.random()*9999);
+document.getElementById("myCode").innerText = myCode;
+
+function save(){
+  localStorage.setItem("coins", coins);
+  document.getElementById("coins").innerText = coins;
+}
+
+function watchAd(){
+  coins += 10;
+  alert("+10 coins");
+  save();
+}
+
+function dailyBonus(){
+  coins += 50;
+  alert("+50 daily bonus");
+  save();
+}
+
+function applyRef(){
+  coins += 1000;
+  alert("+1000 referral bonus");
+  save();
+}
+
+function withdraw(){
+  if(coins < 25000){
+    alert("Need 25,000 coins first!");
+    return;
+  }
+
+  coins -= 25000;
+  alert("Withdrawal requested!");
+  save();
+}
+</script>
+
+</body>
+</html>
